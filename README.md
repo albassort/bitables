@@ -16,7 +16,7 @@ A classifier is a proc with an input of the type you are creating the bitable, t
 
 ```nim
 proc classify(a : char) : bool =
-  return  isUpper(Rune(a))
+    return isUpper(Rune(a))
 # classify will now be used to distinguish between the two tables
 var caseBiTable = initBiTable[char, char](classify)
 caseBiTable['a'] = 'A'
