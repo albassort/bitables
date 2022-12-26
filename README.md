@@ -35,8 +35,29 @@ x[upper('A')] = lower('b')
 
 credit to ElegantBeef for making this method possible with writing the hashing code
 
+# why is this distinct type raising an error???
+```nim
+import bitables
+type    
+  upper = distinct string
+  lower = distinct string
+#raises an template instanciation, hash unexpected type
+var charTable = initBiTable[upper, lower]()
+```
+This is expected behaviour. Hashes can be get confused with distinct typing on imported modules and not use the user defined hash in the file
 
-# Creating BiTables from Tables
+```nim
+include bitables
+#using include fixes this issue as it forces hashes to use the defined hash proc
+type    
+  upper = distinct string
+  lower = distinct string
+
+var charTable = initBiTable[upper, lower]()
+```
+
+
+# Creating BiTables from A TABLE
 ```nim
 let newTable = initBiTable({"a" : 'A'}.toTable())
 echo newTable
