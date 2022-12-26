@@ -18,9 +18,7 @@ type
         $x is string
 
 #   Credit to beef for this... interesting code
-proc hash*[T: distinct](val: T): Hash = distinctBase(val).hash()
 proc `==`*[T: distinct](a, b: T): bool = distinctBase(a) == distinctBase(a)
-proc `$`*[T: distinct](val: T): string = distinctBase(val)
 
 
 proc initBiTable*[A, B](a : Table[A, B], classifier : static proc(a : A) : bool = nil) : BiTable[A,B]  =
@@ -176,3 +174,10 @@ static:
         true
     doAssert(compiles(doesThisCompile))
     discard doesThisCompile
+
+type    
+  upper = distinct int32
+  lower = distinct  int32
+var charTable = initBiTable(initTable[upper, lower]())
+charTable[upper('A')] = lower('b')
+doAssert(charTable[upper('A')] == lower('a'))
