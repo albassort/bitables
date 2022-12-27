@@ -43,7 +43,7 @@ proc initBiTable*[A, B](classifier : static proc(a : A) : bool = nil) : BiTable[
     initBiTable(initTable[A,B](), classifier)
 
 proc `[]`*[A,B](a : BiTable[A, B] | BiTable[A, A], input: A | B) : A | B =
-    when a isnot BiTable[A,A]:
+    when type(A) isnot type(B):
         when input is A: 
             a.ATable[input] 
         else:
@@ -56,7 +56,7 @@ proc `[]`*[A,B](a : BiTable[A, B] | BiTable[A, A], input: A | B) : A | B =
 
 
 proc `[]=`*[A,B](a : BiTable[A, B] | BiTable[A, A], input: A | B, sink : A | B) =
-    when a isnot BiTable[A,A]:
+    when type(A) isnot type(B):
         when input is A: 
             a.ATable[input] = sink
             a.BTable[sink] = input
@@ -76,7 +76,7 @@ proc clear*[A,B](a : BiTable[A,B]) =
     a.BTable.clear()
 
 proc del*[A,B](a : BiTable[A, B] | BiTable[A, A], input: A | B) =
-    when a isnot BiTable[A,A]:
+    when type(A) isnot type(B):
         when input is A: 
             a.ATable.del(input)
         else:
@@ -96,7 +96,7 @@ proc getOrDefault*[A,B](a : BiTable[A,B], val : A | B, default : A | B) : A | B 
         return default
 
 proc contains*[A,B](a : BiTable[A, B] | BiTable[A, A], input: A | B) : bool =
-    when a isnot BiTable[A,A]:
+    when type(A) isnot type(B):
         when input is A: 
             a.ATable.contains(input)
         else:
