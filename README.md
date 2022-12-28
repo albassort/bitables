@@ -22,6 +22,13 @@ var caseBiTable = initBiTable[char, char](classify)
 caseBiTable['a'] = 'A'
 doAssert(caseBiTable['a'] == 'A')
 ```
+or if you like functionality
+```nim
+import sugar
+var caseBiTable = initBiTable[char, char](x=> isUpper(Rune(x)))
+caseBiTable['a'] = 'A'
+doAssert(caseBiTable['a'] == 'A')
+```
 
 This is my preferred method, because you only need to manage state once, in a single proc. Though the same effect can be achieved with distinct types
 method 2: distinct types
