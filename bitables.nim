@@ -10,8 +10,8 @@ proc invertTable*[A,B](a : Table[A,B]) : Table[B,A] =
 type 
     BiTable*[A, B] = ref object
         #this is private because any monkeying with this will immediately make it nonfunctional
-        ATable : Table[A, B]
-        BTable : Table[B, A]
+        ATable* : Table[A, B]
+        BTable* : Table[B, A]
         classifier : proc(a : A) : bool
 
     canPrint = concept x 
