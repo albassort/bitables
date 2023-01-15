@@ -118,7 +118,7 @@ proc `$`*(a : BiTable) : string =
 proc len*[A,B](a : BiTable[A, B]) : int =
     return a.ATable.len()
 
-iterator pairs[A,B](a : BiTable[A,B]) : (A,B) =
+iterator pairs*[A,B](a : BiTable[A,B]) : (A,B) =
     for x in BiTable.Atable.pairs:
         yield x
 
